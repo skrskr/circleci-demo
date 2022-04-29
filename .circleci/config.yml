@@ -12,9 +12,9 @@ commands:
   sayHello:
     description: "A very simple command to print hello"
     parameters:
-      - to:
-          type: string
-          default: "Hello"
+      to:
+        type: string
+        default: "Hello"
     steps:
       - run: echo My << parameters.to >> World !!
     
