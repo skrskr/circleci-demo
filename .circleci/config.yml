@@ -111,7 +111,7 @@ jobs:
 
   try_fail_job:
     docker:
-      - image: "cimg/base:stable"
+      - image: "circleci/node:13.8.0"
     steps:
       - run:
         name: "return 1 to stop pplie"
