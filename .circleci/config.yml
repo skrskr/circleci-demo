@@ -32,27 +32,50 @@ jobs:
   #         name: "Env Variables Job"
   #         command: "echo $MY_ENV_NAME"
 
-  save_hello_world_output:
+  # save_hello_world_output:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - run:
+  #         name: "save hello world to workspace"
+  #         command: "echo 'Hello World!!' > output.txt"
+  #     - persist_to_workspace:
+  #         root: .
+  #         paths:
+  #           - output.txt
+
+  # print_output_file:
+  #   docker:
+  #     - image: circleci/node:13.8.0
+  #   steps:
+  #     - attach_workspace:
+  #         at: .
+  #     - run:
+  #         name: "Restor hello world from output.txt"
+  #         command: "cat output.txt"
+
+  save_hello_world_cache:
     docker:
       - image: circleci/node:13.8.0
     steps:
       - run:
           name: "save hello world to workspace"
-          command: "echo 'Hello World!!' > output.txt"
-      - persist_to_workspace:
-          root: .
+          command: "echo 'Hello World CACHE!!' > cache.txt"
+      - save_cache:
+          key: v1-my-project-{{ checksum "project.clj" }}
           paths:
-            - output.txt
+            - cache.txt
 
-  print_output_file:
+  print_cache_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - attach_workspace:
-          at: .
+      - restore_cache:
+          keys:
+            - v1-my-project-{{ checksum "project.clj" }}
       - run:
-          name: "Restor hello world from output.txt"
-          command: "cat output.txt"
+          name: "Restore hello world from cache.txt cache"
+          command: "cat cache.txt"
 
 
 
@@ -66,7 +89,12 @@ workflows:
       #     requires: 
       #       - print_hello
       # - global_var
-      - save_hello_world_output
-      - print_output_file:
+      # - save_hello_world_output
+      # - print_output_file:
+      #     requires:
+      #       - save_hello_world_output
+
+      - save_hello_world_cache
+      - print_cache_file:
           requires:
-            - save_hello_world_output
+            - save_hello_world_cache
