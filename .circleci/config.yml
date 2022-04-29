@@ -40,9 +40,9 @@ jobs:
           name: "save hello world to workspace"
           command: "echo 'Hello World!!' > output.txt"
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: .
           paths:
-            - output.txt
+            - .
 
   print_output_file:
     docker:
