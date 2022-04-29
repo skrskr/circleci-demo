@@ -62,7 +62,7 @@ jobs:
           name: "save hello world to workspace"
           command: "echo 'Hello World CACHE!!' > cache.txt"
       - save_cache:
-          key: v1-my-project-{{ checksum "project.clj" }}
+          key: v1-my-project-key
           paths:
             - cache.txt
 
@@ -72,7 +72,7 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - v1-my-project-{{ checksum "project.clj" }}
+            - v1-my-project-key
       - run:
           name: "Restore hello world from cache.txt cache"
           command: "cat cache.txt"
