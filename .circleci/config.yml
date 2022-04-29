@@ -103,7 +103,7 @@ jobs:
   #     - sayhello:
   #         to: "HI"
 
-  print_pipeline_id_job:
+  print_pipeline_id:
     docker:
       - image: "cimg/base:stable"
     steps:
@@ -129,4 +129,4 @@ workflows:
       #     requires:
       #       - save_hello_world_cache
       # - say_hello_with_commands
-      - print_pipeline_id_job
+      - print_pipeline_id
