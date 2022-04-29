@@ -72,7 +72,7 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - v1-my-project-{{ checksum "cache.txt" }}
+            - v1-my-project-{{ checksum "/home/circleci/project/cache.txt" }}
       - run:
           name: "Restore hello world from cache.txt cache"
           command: "cat cache.txt"
