@@ -42,7 +42,7 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
-            - .
+            - ./
 
   print_output_file:
     docker:
@@ -52,7 +52,7 @@ jobs:
           name: "Restor hello world from output.txt"
           command: "cat output.txt"
       - attach_workspace:
-          at: .
+          at: ./
 
 
 
