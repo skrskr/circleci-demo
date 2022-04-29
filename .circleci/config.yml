@@ -115,10 +115,10 @@ jobs:
     steps:
       - run:
         name: "return 1 to stop pplie"
-        command: exit 1
+        command: return 1
       - run:
         name: "rollback when failer happend"
-        command: "echo rollback_step"
+        command: echo "rollback_step"
         when: on_fail
 
 # Invoke jobs via workflows
