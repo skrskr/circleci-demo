@@ -20,6 +20,16 @@ jobs:
       - run:
           name: "world Job"
           command: "echo world"
+  
+  global_var:
+    docker:
+      - image: circleci/node:13.8.0
+    steps:
+      - run:
+          name: "global var Job"
+          command: "echo My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >>"
+
+          
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -30,3 +40,4 @@ workflows:
       - print_world:
           requires: 
             - print_hello
+      - global_var
