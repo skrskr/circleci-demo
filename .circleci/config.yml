@@ -114,12 +114,12 @@ jobs:
       - image: "circleci/node:13.8.0"
     steps:
       - run:
-        name: "return 1 to stop pplie"
-        command: return 1
+          name: "return 1 to stop pplie"
+          command: return 1
       - run:
-        name: "rollback when failer happend"
-        command: echo "rollback_step"
-        when: on_fail
+          name: "rollback when failer happend"
+          command: echo "rollback_step"
+          when: on_fail
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
