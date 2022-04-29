@@ -2,6 +2,11 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+
+defaults: &defaults
+  docker:
+    - image: circleci/node:13.8.0
+
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
@@ -55,8 +60,7 @@ jobs:
   #         command: "cat output.txt"
 
   save_hello_world_cache:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - run:
           name: "save hello world to workspace"
@@ -67,8 +71,7 @@ jobs:
             - cache.txt
 
   print_cache_file:
-    docker:
-      - image: circleci/node:13.8.0
+    <<: *defaults
     steps:
       - restore_cache:
           keys:
