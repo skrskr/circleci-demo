@@ -9,7 +9,7 @@ version: 2.1
 
 
 commands:
-  sayHello:
+  sayhello:
     description: "A very simple command to print hello"
     parameters:
       to:
@@ -96,7 +96,7 @@ jobs:
     docker:
       - image: "cimg/base:stable"
     steps:
-      - sayHello:
+      - sayhello:
           to: "HI"
 
 # Invoke jobs via workflows
