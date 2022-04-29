@@ -28,8 +28,9 @@ jobs:
       - run:
           name: "global var Job"
           command: "echo My pipeline id is << pipeline.id >> and my git branch is << pipeline.git.branch >>"
-
-          
+      - run:
+        name: "Env Variables Job"
+        command: "echo MY_ENV_NAME"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
