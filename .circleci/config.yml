@@ -52,7 +52,7 @@ jobs:
           name: "Restor hello world from output.txt"
           command: "cat output.txt"
       - attach_workspace:
-          at: ./
+          at: /tmp/workspace
 
 
 
