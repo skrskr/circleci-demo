@@ -40,19 +40,19 @@ jobs:
           name: "save hello world to workspace"
           command: "echo 'Hello World!!' > output.txt"
       - persist_to_workspace:
-          root: .
+          root: ~/
           paths:
-            - ./
+            - output.txt
 
   print_output_file:
     docker:
       - image: circleci/node:13.8.0
     steps:
+      - attach_workspace:
+          at: ~/
       - run:
           name: "Restor hello world from output.txt"
           command: "cat output.txt"
-      - attach_workspace:
-          at: /tmp/workspace
 
 
 
