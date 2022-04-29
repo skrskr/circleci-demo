@@ -115,7 +115,7 @@ jobs:
     steps:
       - run:
         name: "return 1 to stop pplie"
-        command: "return 1"
+        command: "echo error && exit 1"
       - run:
         name: "rollback when failer happend"
         command: "echo rollback_step"
