@@ -3,9 +3,21 @@
 version: 2.1
 
 
-defaults: &defaults
-  docker:
-    - image: circleci/node:13.8.0
+# defaults: &defaults
+#   docker:
+#     - image: circleci/node:13.8.0
+
+
+commands:
+  sayHello:
+    description: "A very simple command to print hello"
+    parameters:
+      - to:
+          type: string
+          default: "Hello"
+    steps:
+      - run: echo My << parameters.to >> World !!
+    
 
 # Define a job to be invoked later in a workflow.
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
@@ -59,28 +71,33 @@ jobs:
   #         name: "Restor hello world from output.txt"
   #         command: "cat output.txt"
 
-  save_hello_world_cache:
-    <<: *defaults
+  # save_hello_world_cache:
+  #   <<: *defaults
+  #   steps:
+  #     - run:
+  #         name: "save hello world to workspace"
+  #         command: "echo 'Hello World CACHE!!' > cache.txt"
+  #     - save_cache:
+  #         key: v1-my-project-key
+  #         paths:
+  #           - cache.txt
+
+  # print_cache_file:
+  #   <<: *defaults
+  #   steps:
+  #     - restore_cache:
+  #         keys:
+  #           - v1-my-project-key
+  #     - run:
+  #         name: "Restore hello world from cache.txt cache"
+  #         command: "cat cache.txt"
+
+  say_hello_with_commands:
+    docker:
+      - image: "cimg/base:stable"
     steps:
-      - run:
-          name: "save hello world to workspace"
-          command: "echo 'Hello World CACHE!!' > cache.txt"
-      - save_cache:
-          key: v1-my-project-key
-          paths:
-            - cache.txt
-
-  print_cache_file:
-    <<: *defaults
-    steps:
-      - restore_cache:
-          keys:
-            - v1-my-project-key
-      - run:
-          name: "Restore hello world from cache.txt cache"
-          command: "cat cache.txt"
-
-
+      - sayHello:
+        to: "HI"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -97,7 +114,8 @@ workflows:
       #     requires:
       #       - save_hello_world_output
 
-      - save_hello_world_cache
-      - print_cache_file:
-          requires:
-            - save_hello_world_cache
+      # - save_hello_world_cache
+      # - print_cache_file:
+      #     requires:
+      #       - save_hello_world_cache
+      - say_hello_with_commands
