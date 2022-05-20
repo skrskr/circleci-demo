@@ -210,7 +210,7 @@ jobs:
           command: echo install
       - run:
           name: exit from command
-          command: exit 1
+          command: echo "hi"
       - notify_slack_error
       - notify_slack_pass
 
