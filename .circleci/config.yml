@@ -214,7 +214,21 @@ jobs:
       - notify_slack_error
       - notify_slack_pass
 
+  failed-deploy:
+    docker:
+      - image: circleci/node:12.18.0
+    steps:
+      - run:
+          name: Install packages
+          command: echo install
+      - run:
+          name: exit from command
+          command: exit 1
+      - notify_slack_error
+      - notify_slack_pass
+
 workflows:
   test_slack_notification:
     jobs:
       - deploy
+      - failed-deploy
